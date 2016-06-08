@@ -1,0 +1,79 @@
+\documentclass[11pt]{submissionClass}
+
+\begin{document}
+
+\section{Dados da Proposta}
+\textbf{Nome do Projeto:} Projeto Solvian\\
+\textbf{Continuação do projeto 2015?} Não \\
+\textbf{Professor responsável:} Maximiliam Luppe\\
+\textbf{Email:} maxluppe@sc.usp.br\\
+\textbf{Instituição:} Universidade de São Paulo\\
+\textbf{Data:} 04/04/2016 
+
+
+\subsection{Equipe}
+\equipe{Guilherme Malacrida Alves}{Graduando em engenharia mecatrônica}{guilherme.malacrida.alves@usp.br}
+\equipe{Rafael Shibana Fayan}{Graduando em Engenharia da Computação}{rafael.fayan@usp.br}
+\equipe{William Koji Yonamine}{Graduando em Engenharia Elétrica com ênfase em eletrônica}{william.yonamine@usp.br} 
+
+
+\subsection{Área do Concurso} \raggedright
+(X)  Carros / Casas / Cidades Inteligentes \\
+(    )  Saúde\\
+(    )   Automação Industrial\\
+(    )  Wearables\\ 
+(    )  Segurança\\
+(    )  Varejo\\
+(    )  Robótica\\
+
+
+\section{Identificação e histórico da equipe} 
+\paragrafo{Os participantes da nossa equipe são membros do grupo SEMEAR- Soluções em Engenharia e Aplicação na Robótica. O SEMEAR é um grupo extracurricular sem fins lucrativos e organizado por alunos da Universidade de São Paulo (USP), no campus de São Carlos. O grupo conta com cerca de 35 membros, dentre eles, alunos de graduação, pós-graduação e professores. Tem por objetivo complementar a formação acadêmica e profissional de seus membros, além de gerar e compartilhar o conhecimento com seus programas de ensino e extensão, desenvolvimento de projetos tecnológicos e participação em competições de robótica.\\
+A equipe competidora faz parte do núcleo de projetos do SEMEAR, e trabalha desenvolvendo projetos de engenharia de autoria própria e em parceria com empresas. Os projetos são realizados visando a ampliação do conhecimento dos membros e o contato inicial com empresas, complementando a formação dos alunos e aproximando-os de um ambiente empresarial ainda na universidade, preparando-os melhor para o mercado de trabalho.\\
+A equipe já realizou projetos como uma tranca eletrônica para uso interno do grupo e um varal autônomo que foi apresentado em mostra de projetos. Outro projeto atualmente em desenvolvimento é a construção de uma impressora 3D através da adaptação de uma fresadora. Além dos projetos realizados dentro do SEMEAR, os membros também já realizaram diversos outros projetos derivados da graduação.} \\
+\idEquipe{Professor: Maximiliam Luppe}{O professor responsável Possui graduação em Fisica Computacional - IFSC (1994), mestrado (1997) e doutorado (2003) em Física Computacional pela Universidade de São Paulo (2003). Atualmente é Professor Doutor MS-3 da Universidade de São Paulo. Tem experiência na área de Ciência da Computação, com ênfase em Hardware, atuando principalmente nos seguintes temas: Arquiteturas para Processamento de Imagens, FPGA, Robótica Didática, Microcontroladores e Linguagens de Programação C e de Montagem.} 
+
+\section{Descrição do sistema embarcado a ser desenvolvido}
+\paragrafo{A ideia principal do projeto é desenvolver um sistema de controle inteligente de temperatura através de um condicionador de ar utilizando os conceitos de IOT. Para tal faremos uso de um módulo GSM 2G da Tellit e sua plataforma para IOT além de uma placa Intel Galileu.
+Nosso projeto se baseia em desenvolver um sistema de monitoramento de temperatura e presença das salas, possibilitando uma análise em tempo real do ambiente em que o sistema está instalado. Através dele buscamos obter controle da temperatura ambiente de modo autônomo através da formação de rotinas, a partir dos padrões de uso e da presença ou não de pessoas no ambiente, que serão utilizadas automaticamente pelo nosso sistema, promovendo uma possível economia de energia sem a perda de conforto.
+O sistema estará conectado a rede e poderá ser monitorado e controlado pelo usuário através de um aplicativo de celular. Este aplicativo lhe mostrará informações de temperatura e a presença ou não de pessoas no local, além de permitir que o usuário defina preferências e desabilite a função autônoma caso deseje (por exemplo o morador de uma residência viaja e quer economizar energia). Inicialmente a função autônoma estará desabilitada, observando os padrões de utilização do usuário, e após definido este padrão, o sistema poderá funcionar em modo autônomo, regulando seu funcionamento de acordo com aspectos como: horários regulares de uso da sala, presença no local e temperatura de preferência. Caso o sistema não detecte presença no local, ele ajustará a potência consumida pelo aparelho reduzindo o consumo de energia}
+
+
+\section{Justificativa e áreas de aplicação}
+\paragrafo{O projeto do sistema a ser desenvolvido foi proposto por uma empresa parceira especializada em controle de operações em tempo real, que patrocina a equipe. Tendo em mente, a constante busca por mais conforto nos dias atuais, e o aumento do uso de aparelhos de ar condicionado nos diferentes ambientes que convivemos, surgiu a ideia de automatizar o funcionamento de tais aparelhos, conectando-os na rede, permitindo um melhor monitoramento do local. Tal projeto tem como finalidade ser um produto economicamente viável para ser comercializado pela empresa parceira.
+O projeto tem como aplicação direta a automatização de sistemas de ar condicionado em prédios comerciais e residências, em que por diversas vezes é necessário um controle e monitoramento à distância da temperatura, para que assim seja possível um maior conforto ao usuário, além de permitir a possibilidade de se economizar recursos.
+Este sistema permitirá um maior conforto e praticidade para o usuário, pois o sistema de ar condicionado será ativado e regulado sem a presença de pessoas no local e de forma autônoma, de maneira que quando estas adentrem o recinto este já esteja em uma temperatura confortável sem a necessidade de o usuário tomar qualquer ação. Com isso, será possível eliminar a preocupação de regular o funcionamento do ar condicionado todos os dias, além de reduzir gastos de energia quando necessário.}
+
+
+\section{Cronograma de implementação do sistema embarcado a ser desenvolvido}
+
+\paragrafo{(04/04) Envio da proposta\\
+(05/04) Envio de informações via MQTT para plataforma através de um computador pessoal.\\
+(06/04) Início da implementação do sistema de comunicação via MQTT a partir de um computador pessoal.\\
+(08/04) Reunião com a Empresa parceira para alinhamento de ideias e repasses.\\
+(15/04)Finalização da placa com módulo de 2G.\\
+(19/04) Início dos testes da placa com módulo 2G.\\	
+(30/04) Resultado da competição.\\
+(03/05) Início da documentação para a competição.\\
+(03/05-24/05) Adaptação das necessidades do projeto a placa intel galileo.\\
+(08/06) Webinário sobre a placa e competição.\\
+(10/06) Início da integração do módulo 2G à placa intel galileo.\\
+(24/06) Início dos testes da placa de 2G integrada à placa intel galileo.\\
+(26/06) Início dos testes de implementação da comunicação via  MQTT na placa intel galileo.\\
+(30/06) Finalização da implementação da comunicação via MQTT e da placa com módulo 2G.\\
+(30/06) Início da implementação do aplicativo.\\
+(01/07) Início dos testes dos sistemas de detecção de presença e medição de temperatura.\\
+(02/08) Finalização dos sistemas de detecção de presença e medição de temperatura.\\
+(22/08) Início dos testes do protótipo  do aplicativo.\\
+(31/08) Início dos testes no sistema de comunicação infra vermelho.\\
+(20/09) Entrega da documentação ?parcial.\\
+(23/09) Finalização do sistema de comunicação infravermelho.\\
+(25/09) Finalização do aplicativo.\\
+(16/10 - 30/10) Correção de bugs.\\
+(20/10 - 30/10) Preparação da apresentação.\\
+(25/10) - Finalização da documentação final.\\
+(30/10) Entrega da documentação final.\\
+(1/11-4/11) Apresentação.\\
+	
+}
+\end{document} 

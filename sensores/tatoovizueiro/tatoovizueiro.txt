@@ -1,0 +1,7 @@
+sensor na maior distância, não funciona muito bem, fica sempre dando que tem gente.
+No modo "repeat trigger" ele reseta o delay toda vez que alguém passar na frente do sensor.
+No modo "single trigger" ele não reseta o delay, desligando o "olar/led" quando o tempo de delay acabar.(2.28s, totalmente anti-horario)
+
+O delay já está num valor bom, de preferencia não mecher.(mínimo de delay ajustado)
+
+testar sensor na salinha
