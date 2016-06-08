@@ -1,10 +1,16 @@
 #include <SD.h>
 #include <SPI.h>
-
+/*para o uno
+  ** MOSI - pin 11
+ ** MISO - pin 12
+ ** CLK - pin 13
+ */
 int sd_cs = 10;
 
 char* nomes[]={"dados/a","dados/b"};
 int numArq = 2;
+
+File root = SD.open("/");//abre o diretório raiz
 
 void setup(){
 	Serial.begin(9600);
@@ -14,8 +20,6 @@ void setup(){
 			return;
 		}
 	Serial.println("card initialized.");//inicialização do sd
-
-	root = SD.open("/");//abre o diretório raiz
 
 	clearSD(root);
 

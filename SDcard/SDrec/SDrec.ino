@@ -1,15 +1,21 @@
 #include <SPI.h>
 #include <SD.h>
 
-int sd_cs = 10;
+/*para o uno
+  ** MOSI - pin 11
+ ** MISO - pin 12
+ ** CLK - pin 13
+ */
+const int sd_cs = 10;
+
+const int numArq = 2;
+const char *nomes[] = {"dados/a","dados/b"};
 
 class recorder{
 	private:
-    	int numArq = 2;
-		char* nomes[]={"dados/a", "dados/b"};
-    	File dataWrite;
+    File dataWrite;
 		File dataRead;
- 		int data;//teste
+ 		String data;//teste
 
 		void dataTreat(){
 
@@ -28,7 +34,7 @@ class recorder{
 			while(!Serial.available()){
 				;
 			}
-			data = Serial.read();//teste
+			data = Serial.readString();//teste
 			//dataTreat(); no momento é desnecessauro
 		}//coleta os dados dos sensores
 
@@ -38,10 +44,8 @@ class recorder{
 
 		void data_sd_read(){
 			dataRead.seek(0);
-			char temp = dataRead.read();
-			while(temp!=(-1)){
-				Serial.print(temp);
-			}//teste
+			String temp = dataRead.readString();
+			Serial.print(temp);
 			Serial.println("fim do arquivo");
 		}
 
@@ -73,6 +77,7 @@ void setup(){
 }
 
 void loop(){
+  rec.dataClear();
 	rec.setFileW(0);
 	rec.setFileR(0);
 	Serial.println("digite um dado");
