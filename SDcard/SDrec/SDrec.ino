@@ -36,6 +36,7 @@ class Recorder{
 		}//construtor para ser chamado no setup cria e inicializa o Recorder
 		
 		void rawDataGet(){
+			Serial.println("digite um dado");
 			while(!Serial.available()){
 				;
 			}
@@ -44,9 +45,11 @@ class Recorder{
 		}//coleta os dados dos sensores
 		
 		void data_sd_record(){
-			dataWrite.print(data);
+      int err;
+			err = dataWrite.print(data);
         	Serial.println(data);
         	Serial.println("recorded");
+          Serial.println(data);
      		String tNom = dataWrite.name();
       		dataWrite.flush();
 		}//grava os dados no cartão sd
@@ -103,10 +106,6 @@ Recorder rec;
 void setup(){
 	Serial.begin(9600);
 	rec.init();
-}
-
-void loop(){
-	//rec.dataClear();
 	Serial.println("ok");
 	err = rec.setFileW(0);
 	if(err){
@@ -115,10 +114,15 @@ void loop(){
 	}
 	rec.rawDataGet();
 	rec.data_sd_record();
-	err = rec.setFileR(0);
+	rec.closeW();
+}
+
+void loop(){
+	//rec.dataClear();
+	/*err = rec.setFileR(0);
 	if(err){
 		rec.closeW();
 		rec.setFileR(0);
 	}
-	rec.data_sd_read();
+	rec.data_sd_read();*/
 }
