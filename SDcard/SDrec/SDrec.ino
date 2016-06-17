@@ -16,7 +16,7 @@ class Recorder{
 		static char *nomes[];
 		File dataWrite;
 		File dataRead;
-		Vector<int> archiveStatus;
+		Vector<int> archiveStatus;//marca qual arquivo está sendo usado(1-leitura,2-escrita)
 		String data;//teste
 
 		void dataTreat(){
@@ -45,14 +45,12 @@ class Recorder{
 		}//coleta os dados dos sensores
 		
 		void data_sd_record(){
-      int err;
-			err = dataWrite.print(data);
+			if(!dataWrite)Serial.println("cade o meu arquivo?");
+			dataWrite.print(data);
+			Serial.println("recorded");
         	Serial.println(data);
-        	Serial.println("recorded");
-          Serial.println(data);
-     		String tNom = dataWrite.name();
       		dataWrite.flush();
-		}//grava os dados no cartão sd
+		}//grava os dados no arquivo selecionado
 
 		void data_sd_read(){
 			dataRead.seek(0);
@@ -64,13 +62,20 @@ class Recorder{
         		Serial.println("read");
 			}
 			Serial.println("fim do arquivo");
-		}
+		}//le os dados do arquivo selecionado
+
+		void clearFile(int num){
+			File aux;
+			SD.remove(nomes[num]);//exclui o arquivo
+			aux = SD.open(nomes[num]);//recria o arquivo, mas em branco
+			aux.close();
+		}//deleta o arquivo num
 		
 		void dataClear(){
 			File aux;
 			for(int i = 0; i<numArq; i++){
-				SD.remove(nomes[i]);
-				aux = SD.open(nomes[i]);
+				SD.remove(nomes[i]);//exclui o arquivo
+				aux = SD.open(nomes[i]);//recria o arquivo, mas em branco
 				aux.close();
 			}
 		}//limpa os dados gravados no cartão sd
@@ -80,6 +85,10 @@ class Recorder{
 
 			dataRead.close();
 			dataRead = SD.open(nomes[num],FILE_READ);
+			for(int i=0;i<numArq;i++){
+				if(archiveStatus[i] == 1)archiveStatus[i] = 0;
+			}
+			archiveStatus[num] = 1;
 			return 0;
 		}//seleciona o arquivo de leitura
 
@@ -88,19 +97,29 @@ class Recorder{
 
 			dataWrite.close();
 			dataWrite = SD.open(nomes[num],FILE_WRITE);
+			for(int i=0;i<numArq;i++){
+				if(archiveStatus[i] == 2)archiveStatus[i] = 0;
+			}
+			archiveStatus[num] = 2;
 			return 0;
 		}//seleciona o arquivo de escrita
 
 		void closeR(){
 			dataRead.close();
-		}
+			for(int i=0;i<numArq;i++){
+				if(archiveStatus[i] == 1)archiveStatus[i] = 0;
+			}
+		}//fecha o arquivo de leitura
 
 		void closeW(){
 			dataWrite.close();
-		}
+			for(int i=0;i<numArq;i++){
+				if(archiveStatus[i] == 2)archiveStatus[i] = 0;
+			}
+		}//fecha o arquivo de escrita
 };//classe que grava no SD
 
-char* Recorder::nomes[]={"dados/a","dados/b"};
+char* Recorder::nomes[]={"dados/a.txt","dados/b.txt"};
 Recorder rec;
 
 void setup(){
@@ -115,6 +134,14 @@ void setup(){
 	rec.rawDataGet();
 	rec.data_sd_record();
 	rec.closeW();
+	rec.clearFile(0);
+	err = rec.setFileR(0);
+	if(err){
+		rec.closeW();
+		rec.setFileR(0);
+	}
+	rec.data_sd_read();
+	rec.closeR();
 }
 
 void loop(){
