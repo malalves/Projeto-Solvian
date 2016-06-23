@@ -2,7 +2,7 @@
 
 int medir=0, periodos=2,val,contagem;
 
-int pin_tatu = 24;;
+int pin_tatu = 24;
 int pin_led = 22;
  
 void setup()
