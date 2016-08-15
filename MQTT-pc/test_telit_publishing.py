@@ -23,9 +23,9 @@ client.username_pw_set("test", password="05LR95wG0vIEsO4e")
 
 client.connect("api.devicewise.com", 1883, 60)
 
-client.publish("thing/test/property/nabo",32,1)
+client.publish("thing/test/property/nabo",31,1)
 print("ok")
-client.publish("thing/test/alarm/finoto",0,1)
+client.publish("thing/test/alarm/finoto",1,1)
 print("ok")
 client.publish("thing/test/attribute/jd","I did it",1)
 print("ok")
