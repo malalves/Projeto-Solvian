@@ -4,7 +4,7 @@
 
 #define mtoFrio 0
 #define frio 15
-int bom = 25;
+#define bom 25
 #define quente 35
 #define mtoQuente 50
 
@@ -144,11 +144,34 @@ int main(){
 	FuzzySet[4]->setMiddle(mtoQuente,mtoQuente);
 	FuzzySet[4]->setType('t');
 	FuzzySet[4]->setName("mtoQuente");
+
 	double dValue;
 	
-	do{
-		cout<<"\nInput the value:" <<endl;
-		dValue=get_temp();
+	do{	
+		char menu = 0;
+		cout<<"\nInput the operation type:\n"<<"a - set center\n"<<"b - Input a value" << endl;
+		cin >> menu;
+		switch (menu){
+			case 'a':
+				cout<<"imput the center temperature: ";
+				double var;
+				var = (bom - get_temp());
+				FuzzySet[0]->setMiddle(mtoFrio - var,mtoFrio - var);
+				FuzzySet[1]->setMiddle(frio - var,frio - var);
+				FuzzySet[2]->setMiddle(bom - var,bom - var);
+				FuzzySet[3]->setMiddle(quente - var,quente - var);
+				FuzzySet[4]->setMiddle(mtoQuente - var,mtoQuente - var);
+				continue;
+
+			case 'b':
+				cout<<"\nInput the value:" <<endl;
+				dValue=get_temp();
+				break;
+
+			default:
+				continue;
+		}
+
 
 		if(dValue < Tmin) continue;
 		if(dValue > Tmax) continue;
