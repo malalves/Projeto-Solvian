@@ -7,15 +7,21 @@
 #define bom 25
 #define quente 35
 #define mtoQuente 50
+//definições básicas de temperaturas
 
 #define Tmin 0
 #define Tmax 50
+//temperaturas máxima e minima de operação
 
 int Smax=30;
 int Smin=17;
+//range do sistema de ar condicionado(o que ele pode mandar)
 
 double dfuzzy[] = {10,5,0,-5,-10};
+//regra para defuzzyficação define as ações de acordo com o conjunto fuzzy ao qual o ponto pertence
 double var = 0;
+//indica a variação do inserido para o padrão
+
 
 using namespace std;
 
@@ -23,7 +29,7 @@ int get_temp(){
 	int tmp;
 	cin >> tmp;
 	return tmp;
-}
+}//recebe valor de temperatura inserido pelo usuário
 
 int generateOut(double fuzzyValues[5]){
 	double partial = 0;
@@ -33,7 +39,7 @@ int generateOut(double fuzzyValues[5]){
 	}
 	final = bom - var + partial;
 	return final;
-}
+}//realiza a defuzzyficação dos valores gerando uma saida de temperatura
 
 class CFuzzyFunction{
 	protected :
@@ -75,7 +81,7 @@ class CFuzzyFunction{
 		}
 
 		virtual double getValue(double t)=0;
-};
+};//classe de funções fuzzy generica
 
 class CTriangle : public CFuzzyFunction{
 	private: 
@@ -98,7 +104,7 @@ class CTriangle : public CFuzzyFunction{
 			else
 				return 0;
 		}
-};
+};//classe derivada de funções fuzzy triangulares
 
 class CTrapezoid : public CFuzzyFunction{
 	private:
@@ -122,7 +128,7 @@ class CTrapezoid : public CFuzzyFunction{
 			else 
 				return 0;
 		}   
-};
+};//classe derivada de funções fuzzy trapezoidais
 
 void fuzzInit(CFuzzyFunction** FuzzySet){
 	FuzzySet[0] = new CTriangle;
@@ -155,7 +161,7 @@ void fuzzInit(CFuzzyFunction** FuzzySet){
 	FuzzySet[4]->setMiddle(mtoQuente,mtoQuente);
 	FuzzySet[4]->setType('t');
 	FuzzySet[4]->setName("mtoQuente");
-}
+}//inicializa os conjuntos fuzzy com os valores predefinidos das temperaturas
 
 void moveFuzz(CFuzzyFunction** FuzzySet){
 	FuzzySet[0]->setMiddle(mtoFrio - var,mtoFrio - var);
@@ -169,17 +175,21 @@ void moveFuzz(CFuzzyFunction** FuzzySet){
 	FuzzySet[2]->setInterval(frio-var,quente-var);
 	FuzzySet[3]->setInterval(bom-var,mtoQuente-var);
 	FuzzySet[4]->setInterval(quente-var,mtoQuente-var);
-}
+}//move os conjuntos fuzzy de acordo com a temperatura desejada
 
 int main(){
 	CFuzzyFunction *FuzzySet[5];
 	fuzzInit(FuzzySet);
+	//cria e inicializa os conjuntos fuzzy
 	
-	double dValue;
-	
+	double tValue;
+	//valor de temperatura a ser medido
+
 	do{	
 		char menu = 0;
+		//variavel auxiliar para operar o menu
 		double fuzzyValues[5];
+		//variavel que registra os valores fuzzy para cada um dos conjuntos
 
 		cout<<"\nInput the operation type:\n"<<"a - set center\n"<<"b - Input a value" << endl;
 		cin >> menu;
@@ -189,31 +199,34 @@ int main(){
 				var = (bom - get_temp());
 				moveFuzz(FuzzySet);
 				continue;
-
+				//move os conjuntos fuzzy para se adequar a uma nova temperatura ideal
 			case 'b':
 				cout<<"\nInput the value:" <<endl;
-				dValue=get_temp();
+				tValue=get_temp();
 				break;
-
+				//registra uma temperatura a ser comparada
 			default:
 				continue;
+				//se inseriu algo inválido refaz o loop
 		}
 
 
-		if(dValue < Tmin) continue;
-		if(dValue > Tmax) continue;
+		if(tValue < Tmin) continue;
+		if(tValue > Tmax) continue;
+		//checa se está na faixa de operação
 
 		for(int i=0; i<5; i++){
 			cout<<"In function:";
 			FuzzySet[i]->getName();
 
-			fuzzyValues[i]=FuzzySet[i]->getValue(dValue);
+			fuzzyValues[i]=FuzzySet[i]->getValue(tValue);
 
 			cout<<"the membership is=";
 			cout<<fuzzyValues[i]<<endl;
-		}
+		}//mostra os valores fuzzy da temperatura inserida para cada um dos conjuntos
 
 		cout<<"output temperature: "<<generateOut(fuzzyValues)<<endl;
+		//printa o resultado de saida gerado pela defuzzyficaçãos
 	}
 	while(true);
 
