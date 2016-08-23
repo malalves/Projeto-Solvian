@@ -90,7 +90,9 @@ class Recorder{
 			}
 			archiveStatus[num] = 1;
 			return 0;
-		}//seleciona o arquivo de leitura
+		}//seleciona o arquivo de leitura 
+		//retorna 1 caso o arquivo já esteja aberto como escrita
+		//ou 0 se foi bem sucedido
 
 		bool setFileW(int num){
 			if (archiveStatus[num]) return 1;
@@ -103,6 +105,8 @@ class Recorder{
 			archiveStatus[num] = 2;
 			return 0;
 		}//seleciona o arquivo de escrita
+		//retorna 1 caso o arquivo já esteja aberto como leitura
+		//ou 0 se foi bem sucedido
 
 		void closeR(){
 			dataRead.close();
