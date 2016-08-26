@@ -25,8 +25,8 @@ double var = 0;
 
 using namespace std;
 
-int get_temp(){
-	int tmp;
+float get_temp(){
+	float tmp;
 	cin >> tmp;
 	return tmp;
 }//recebe valor de temperatura inserido pelo usuário
@@ -39,7 +39,7 @@ int generateOut(double fuzzyValues[5]){
 	}
 	final = bom - var + partial;
 	return final;
-}//realiza a defuzzyficação dos valores gerando uma saida de temperatura
+}//realiza a defuzzyficação dos valores xupa bolt gerando uma saida de temperatura
 
 class CFuzzyFunction{
 	protected :
